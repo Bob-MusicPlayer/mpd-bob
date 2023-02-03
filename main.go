@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
+	"github.com/Bob-MusicPlayer/mpd-bob/handler"
 	"github.com/fhs/gompd/mpd"
-	"mpd-bob/handler"
 	"net/http"
 )
 
 func main() {
 
-	client, err := mpd.Dial("tcp", "192.168.10.16:6600")
+	client, err := mpd.Dial("tcp", "192.168.10.20:6600")
 	if err != nil {
 		panic(err)
 	}
+	defer client.Close()
 
 	mpdHandler := handler.NewMpdHandler(client)
 

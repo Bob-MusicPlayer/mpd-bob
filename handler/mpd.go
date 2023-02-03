@@ -3,8 +3,8 @@ package handler
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/Bob-MusicPlayer/mpd-bob/model"
 	"github.com/fhs/gompd/mpd"
-	"mpd-bob/model"
 	"net/http"
 	"strconv"
 )
@@ -133,7 +133,7 @@ func (mh MpdHandler) HandleSearch(w http.ResponseWriter, req *http.Request) {
 
 	songs := make([]model.Song, 0)
 
-	attr, err := mh.mpdClient.Search("any", search.SearchQuery)
+	attr, err := mh.mpdClient.Find(search.SearchQuery)
 	if err != nil {
 		w.WriteHeader(901)
 		w.Write([]byte(err.Error()))
